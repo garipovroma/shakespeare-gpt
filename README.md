@@ -1,4 +1,14 @@
-## Transformers for generating a text with Shakespeare style.
+# GPT-2 Fine-tuning on Shakespeare dataset
+
+The [https://huggingface.co/gpt2](GPT2) model is fine-tuned on the [https://www.kaggle.com/kingburrito666/shakespeare-plays](Shakespeare dataset). 
+In this repository you can find the code for training the model and generating text from it.
+The fine-tuned model is available on the [https://huggingface.co/garipovroma/gpt_2_shakespeare_finetuned](🤗Huggingface).
+
+## Metrics:
+Model was trained for 1 epoch
+```
+Epoch [1/1] - {'train_loss': 1.1098246806401264, 'train_perplexity': 3.033826459294963, 'val_loss': 1.0202441342251818, 'val_perplexity': 2.7738718783693135}
+```
 
 ### Setup
 ```
@@ -16,7 +26,7 @@ python3 scripts/prepare_data.py
 
 ```
 
-### Train model
+## Train model
 There are a few options to train the model:
 ```
 usage: train.py [-h] [--data_folder DATA_FOLDER] [--learning_rate LEARNING_RATE]
@@ -59,7 +69,7 @@ options:
 python3 scripts/train.py
 ```
 
-# Generate text
+## Generate text
 
 For generating text you can use the following script:
 
