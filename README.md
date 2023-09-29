@@ -4,7 +4,7 @@ The [GPT2](https://huggingface.co/gpt2) model is fine-tuned on the [Shakespeare 
 
 In this repository you can find the code for training the model and generating text from it.
 
-The fine-tuned model is available on the [🤗HuggingFace](https://huggingface.co/garipovroma/gpt_2_shakespeare_finetuned).
+The fine-tuned model is available on the [🤗 HuggingFace](https://huggingface.co/garipovroma/gpt_2_shakespeare_finetuned). You can infer it right in your browser!
 
 ## Metrics:
 Model was trained for 1 epoch
@@ -81,7 +81,6 @@ pip install -r requirements.txt
 
 # Prepare data
 python3 scripts/prepare_data.py
-
 ```
 
 ## Train model
@@ -128,6 +127,7 @@ python3 scripts/train.py
 ```
 
 ## Generate text
+The nucleus sampling is used for text generation.
 
 For generating text you can use the following script:
 
