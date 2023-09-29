@@ -55,46 +55,83 @@ options:
                         use wandb flag
 ```
 
-Example:
 ``` 
-python3 scripts/train.py --use_wandb True
-```
-Output:
-```
-python3 scripts/train.py --use_wandb True
-wandb: Currently logged in as: garipovroma. Use `wandb login --relogin` to force relogin
-wandb: Tracking run with wandb version 0.15.11
-wandb: Run data is saved locally in /Users/garipovroma/work/omnicode-proj/wandb/run-20230929_224515-49p8kko3
-wandb: Run `wandb offline` to turn off syncing.
-wandb: Syncing run gpt2
-wandb: ⭐️ View project at https://wandb.ai/garipovroma/shakespeare-transformers
-wandb: 🚀 View run at https://wandb.ai/garipovroma/shakespeare-transformers/runs/49p8kko3
-Tokenizing data/train_df.csv: 100%|█████████████████████████████████████████| 100/100 [00:00<00:00, 1823.98it/s]
-Tokenizing data/val_df.csv: 100%|███████████████████████████████████████████| 100/100 [00:00<00:00, 2180.22it/s]
-Epoch 1: 100%|██████████████████████████████████████████████████████████████████| 13/13 [01:43<00:00,  8.00s/it]
-Epoch [1/1] - Training Loss: 10.9173 - Perplexity: 55123.5162
-Evaluation after epoch 1: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 13/13 [00:28<00:00,  2.21s/it]
-Epoch [1/1] - {'train_loss': 10.91733169555664, 'train_perplexity': 55123.5162097329, 'val_loss': 9.00640715085543, 'val_perplexity': 8155.168286687939}
-wandb: Waiting for W&B process to finish... (success).
-wandb:
-wandb: Run history:
-wandb:       train_loss ▁
-wandb: train_perplexity ▁
-wandb:         val_loss ▁
-wandb:   val_perplexity ▁
-wandb:
-wandb: Run summary:
-wandb:       train_loss 10.91733
-wandb: train_perplexity 55123.51621
-wandb:         val_loss 9.00641
-wandb:   val_perplexity 8155.16829
-wandb:
-wandb: 🚀 View run gpt2 at: https://wandb.ai/garipovroma/shakespeare-transformers/runs/49p8kko3
-wandb: ️⚡ View job at https://wandb.ai/garipovroma/shakespeare-transformers/jobs/QXJ0aWZhY3RDb2xsZWN0aW9uOjEwMjUwMjEwOA==/version_details/v1
-wandb: Synced 6 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
-wandb: Find logs at: ./wandb/run-20230929_224515-49p8kko3/logs
+python3 scripts/train.py
 ```
 
 # Generate text
 
+For generating text you can use the following script:
+
+```
+usage: generate.py [-h] [--load_mode {huggingface,torch}] --model MODEL --tokenizer TOKENIZER [--device DEVICE] --prompt PROMPT [--out_prompts OUT_PROMPTS] [--result_length RESULT_LENGTH]
+                   [--top_p TOP_P] [--temperature TEMPERATURE] [--seed SEED]
+
+options:
+  -h, --help            show this help message and exit
+  --load_mode {huggingface,torch}
+                        where from to load the model and tokenizer
+  --model MODEL         path to the model or the model name on huggingface
+  --tokenizer TOKENIZER
+                        path to the tokenizer or the tokenizer name on huggingface
+  --device DEVICE       device to run the model on
+  --prompt PROMPT       prompt to generate from
+  --out_prompts OUT_PROMPTS
+                        number of prompts to generate
+  --result_length RESULT_LENGTH
+                        approximate length of the generated text
+  --top_p TOP_P         top p parameter for nucleus sampling
+  --temperature TEMPERATURE
+                        temperature parameter for softmax
+  --seed SEED           seed for random number generators
+```
+
+Example
+```
+python3 scripts/generate.py --model garipovroma/gpt_2_shakespeare_finetuned --tokenizer garipovroma/gpt_2_shakespeare_finetuned --prompt "To be or not to be" --out_prompts 5 --result_length 200
+
+python3 scripts/generate.py --model garipovroma/gpt_2_shakespeare_finetuned --tokenizer garipovroma/gpt_2_shakespeare_finetuned --prompt "To be or not to be" --out_prompts 5 --result_length 200
+Generating tokens: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 50/50 [00:02<00:00, 16.69it/s]
+Generating tokens: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 50/50 [00:02<00:00, 16.99it/s]
+Generating tokens: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 50/50 [00:03<00:00, 16.31it/s]
+Generating tokens: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 50/50 [00:03<00:00, 16.32it/s]
+Generating tokens: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 50/50 [00:03<00:00, 15.90it/s]
+Generating text: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:15<00:00,  3.04s/it]
+0:
+To be or not to be as the lord is gone. I'll go. and the whole and I have gone. and I'll have gone. and no, if you'll have gone? And, sir is dead. And we'll have gone: I'd the good good
+
+Number of words: 42
+Length of the text: 185
+
+
+
+1:
+To be or not to be of him, the whole and I'll and be to be done. I am no of thee to be done. he hath gone. he must die to be gone. I'll not? he will not? And, if I'll not for a
+
+Number of words: 45
+Length of the text: 176
+
+
+
+2:
+To be or not to be in a good king to die of him, if it was gone from him, if they must have gone. For, if the whole earth is dead. I was in a man of a thousand dead and be gone to be gone. I was gone
+
+Number of words: 50
+Length of the text: 199
+
+
+
+3:
+To be or not to be in haste: I'll go, to be to be dead. I'll have gone. I say: I'll leave him, I'll go, I'll go, I'll go, I'll go, if, the good and he will not
+
+Number of words: 38
+Length of the text: 159
+
+
+
+4:
+To be or not to be as the lord, the good, I have, I shall not, I'll have to be to be done the world. I shall not to be. I have, if it was done. he was done. I have, if they will have
+
+Number of words: 45
+Length of the text: 182
 ```
