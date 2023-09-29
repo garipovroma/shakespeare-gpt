@@ -1,8 +1,8 @@
 # GPT-2 Fine-tuning on Shakespeare dataset
 
-The [https://huggingface.co/gpt2](GPT2) model is fine-tuned on the [https://www.kaggle.com/kingburrito666/shakespeare-plays](Shakespeare dataset). 
+The [GPT2](https://huggingface.co/gpt2) model is fine-tuned on the [Shakespeare dataset](https://www.kaggle.com/kingburrito666/shakespeare-plays). 
 In this repository you can find the code for training the model and generating text from it.
-The fine-tuned model is available on the [https://huggingface.co/garipovroma/gpt_2_shakespeare_finetuned](🤗Huggingface).
+The fine-tuned model is available on the [🤗HuggingFace](https://huggingface.co/garipovroma/gpt_2_shakespeare_finetuned).
 
 ## Metrics:
 Model was trained for 1 epoch
