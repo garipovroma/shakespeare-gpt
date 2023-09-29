@@ -1,16 +1,9 @@
 import argparse
 import torch
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
-from tqdm import tqdm
+from tqdm.auto import tqdm
 
-def generate(model,
-             tokenizer,
-             prompt,
-             out_promts=1,
-             prompt_words=64,
-             top_p=0.8,
-             temperature=0.2,
-):
+def generate(model, tokenizer, prompt, out_promts, prompt_words, top_p, temperature):
     model.eval()
     generated_texts = []
     with torch.no_grad():
@@ -19,7 +12,7 @@ def generate(model,
             generated_text = torch.tensor([]).unsqueeze(0)
             ended = False
             
-            for _ in tqdm(range(prompt_words), desc="Generating tokens", total=prompt_words):
+            for _ in range(prompt_words):
                 outputs = model(generated_tokens)
                 logits = outputs[0][:, -1, :]
                 probs = torch.softmax(logits / (temperature if temperature > 0 else 1.0), dim=-1).squeeze()
@@ -81,9 +74,9 @@ if __name__ == "__main__":
     generated_texts = generate(model, tokenizer, args.prompt, args.out_prompts, args.result_length // AVG_WORD_LENGTH, args.top_p, args.temperature)
 
     for i, text in enumerate(generated_texts):
-        print(f"{i}:\n{text}\n")
+        print(f"{i}:\n{text}")
         print(f"Number of words: {len(text.split())}")
         print(f"Length of the text: {len(text)}")
-        print("\n\n")
+        print("\n")
 
 
